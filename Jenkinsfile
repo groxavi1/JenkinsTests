@@ -8,9 +8,7 @@ pipeline {
             agent any
             steps {
                 sh 'groups' 
-				echo "before ${params.testing}"
-				params.testing = "AFTER MOTHERFUCKER"
-				echo "after: ${params.testing}"
+				currentBuild.rawBuild.project.description = 'NEW JOB DESCRIPTION'
             }
         }
         stage('Py Compile') { 
@@ -21,7 +19,6 @@ pipeline {
             }
             steps {
                 sh 'python -m py_compile main.py' 
-				jiraGetIssue
             }
         }
     }
