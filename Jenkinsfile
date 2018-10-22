@@ -10,7 +10,7 @@ pipeline {
                 sh 'groups' 
 				echo "${params.testing}"
 				script {
-					currentBuild.rawBuild.project.description = 'NEW JOB DESCRIPTION'
+					params.testing =  "after
 				}
 				echo "${params.testing}"
             }
