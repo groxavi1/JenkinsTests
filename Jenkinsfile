@@ -30,3 +30,4 @@ pipeline {
 
 def getValue(String value){
     return value
+}
