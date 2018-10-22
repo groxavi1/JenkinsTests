@@ -1,7 +1,7 @@
 pipeline {
     agent none
 	parameters {
-		string(defaultValue: "before", description"testing", name"testing")
+		string(defaultValue: "before", description: "testing", name: "testing")
 	}
     stages {
         stage('Information') { 
