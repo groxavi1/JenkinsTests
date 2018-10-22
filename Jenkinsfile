@@ -10,7 +10,7 @@ pipeline {
                 sh 'groups' 
 				echo "${params.testing}"
 				script {
-					params.testing =  "after
+					params.testing =  "after"
 				}
 				echo "${params.testing}"
             }
