@@ -8,7 +8,12 @@ pipeline {
             agent any
             steps {
                 sh 'groups' 
-				currentBuild.rawBuild.project.description = 'NEW JOB DESCRIPTION'
+				echo "${params.testing}"
+				script {
+					params.testing = "AFTER"
+					currentBuild.rawBuild.project.description = 'NEW JOB DESCRIPTION'
+				}
+				echo "${params.testing}"
             }
         }
         stage('Py Compile') { 
