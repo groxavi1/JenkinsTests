@@ -8,11 +8,10 @@ pipeline {
             agent any
             steps {
                 sh 'groups' 
+				echo "before ${params.testing}"
+				params.testing = "AFTER MOTHERFUCKER"
+				echo "after: ${params.testing}"
             }
-			echo "before ${params.testing}"
-			params.testing = "AFTER MOTHERFUCKER"
-			echo "after: ${params.testing}"
-			
         }
         stage('Py Compile') { 
             agent {
