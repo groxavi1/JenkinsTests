@@ -1,7 +1,7 @@
 pipeline {
     agent none
 	parameters {
-		string(defaultValue: "before", description: "testing", name: "testing")
+		string(defaultValue: getValue("TESSSTING"), description: "testing", name: "testing")
 	}
     stages {
         stage('Information') { 
@@ -27,3 +27,6 @@ pipeline {
         }
     }
 }
+
+def getValue(String value){
+    return value
