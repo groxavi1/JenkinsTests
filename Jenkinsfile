@@ -21,14 +21,11 @@ pipeline {
         }
 		stage('Create Release'){
 			steps {
-				bat "git tag -a ${params.version} -m \"Release ${params.version}\""
+				echo "${env.version}
+				sh "git tag -a ${params.version} -m \"Release ${env.version}\""
 				bat "git push origin ${env.VERSION}"
 			}
 			
 		}
 	}
-}
-
-def getValue(String value){
-    return value
 }
