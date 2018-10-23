@@ -18,14 +18,5 @@ pipeline {
                 sh 'python -m py_compile main.py' 
             }
         }
-		stage('Create Release'){
-			agent any
-			steps {
-				echo "${env.version}"
-				sh "git tag -a ${params.version} -m \"Release ${env.version}\""
-				sh "git push origin ${env.VERSION}"
-			}
-			
-		}
 	}
 }
