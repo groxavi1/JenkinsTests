@@ -1,20 +1,7 @@
 pipeline {
     agent none
-	parameters {
-		string(defaultValue: getValue("TESSSTING"), description: "testing", name: "testing")
-	}
+
     stages {
-        stage('Information') { 
-            agent any
-            steps {
-                sh 'groups' 
-				echo "${params.testing}"
-				script {
-					params.testing =  "after"
-				}
-				echo "${params.testing}"
-            }
-        }
         stage('Py Compile') { 
             agent {
                 docker {
@@ -25,6 +12,14 @@ pipeline {
                 sh 'python -m py_compile main.py' 
             }
         }
+		stage('Create Release'){
+			script {
+				env.RELEASE_TAG = "v3"
+			}
+			bat "git tag -a ${env.RELEASE_TAG} -m \"Release ${env.RELEASE_TAG}\""
+            bat "git push origin ${env.RELEASE_TAG}"
+		
+		}
     }
 }
 
