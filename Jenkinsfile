@@ -19,9 +19,9 @@ pipeline {
 		stage('Create Release'){
 				bat "git tag -a ${params.version} -m \"Release ${params.version}\""
 				bat "git push origin ${params.version}"
-			}
+			
 		}
-    }
+	}
 }
 
 def getValue(String value){
