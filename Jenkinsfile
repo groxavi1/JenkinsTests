@@ -1,4 +1,5 @@
 pipeline {
+    agent none
 	parameters {
         string(defaultValue: '3', description: 'Version number.', name: 'version')
     }
@@ -18,6 +19,7 @@ pipeline {
             }
         }
 		stage('Create Release'){
+			agent any
 			steps {
 				echo "${env.version}"
 				sh "git tag -a ${params.version} -m \"Release ${env.version}\""
