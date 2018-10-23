@@ -17,8 +17,10 @@ pipeline {
             }
         }
 		stage('Create Release'){
+			steps {
 				bat "git tag -a ${params.version} -m \"Release ${params.version}\""
 				bat "git push origin ${params.version}"
+			}
 			
 		}
 	}
