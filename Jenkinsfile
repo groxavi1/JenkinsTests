@@ -1,6 +1,4 @@
 pipeline {
-    agent none
-	
 	parameters {
         string(defaultValue: '3', description: 'Version number.', name: 'version')
     }
