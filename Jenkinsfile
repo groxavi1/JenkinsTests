@@ -13,12 +13,13 @@ pipeline {
             }
         }
 		stage('Create Release'){
-			script {
-				env.RELEASE_TAG = "v3"
+			steps {
+				script {
+					env.RELEASE_TAG = "v3"
+				}
+				bat "git tag -a ${env.RELEASE_TAG} -m \"Release ${env.RELEASE_TAG}\""
+				bat "git push origin ${env.RELEASE_TAG}"
 			}
-			bat "git tag -a ${env.RELEASE_TAG} -m \"Release ${env.RELEASE_TAG}\""
-            bat "git push origin ${env.RELEASE_TAG}"
-		
 		}
     }
 }
