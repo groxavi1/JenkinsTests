@@ -22,10 +22,10 @@ pipeline {
 			agent any
 			steps {
 				echo "${env.version}"
-				bat "git config --global user.name 'Xavier Groleau'"
-				bat "git config --global user.email 'xavier.groleauh@example.com'"
-				bat "git tag -a ${params.version} -m \"Release ${env.version}\""
-				bat "git push origin ${env.VERSION}"
+				sh "git config --global user.name 'Xavier Groleau'"
+				sh "git config --global user.email 'xavier.groleauh@example.com'"
+				sh "git tag -a ${params.version} -m \"Release ${env.version}\""
+				sh "git push origin ${env.VERSION}"
 			}
 			
 		}
