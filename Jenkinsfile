@@ -1,5 +1,9 @@
 pipeline {
     agent none
+	
+	parameters {
+        string(defaultValue: '3', description: 'Version number.', name: 'version')
+    }
 
     stages {
         stage('Py Compile') { 
@@ -13,12 +17,8 @@ pipeline {
             }
         }
 		stage('Create Release'){
-			steps {
-				script {
-					env.RELEASE_TAG = "v3"
-				}
-				bat "git tag -a ${env.RELEASE_TAG} -m \"Release ${env.RELEASE_TAG}\""
-				bat "git push origin ${env.RELEASE_TAG}"
+				bat "git tag -a ${params.version} -m \"Release ${params.version}\""
+				bat "git push origin ${params.version}"
 			}
 		}
     }
