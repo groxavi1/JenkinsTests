@@ -21,7 +21,7 @@ pipeline {
         }
 		stage('Create Release'){
 			steps {
-				echo "${env.version}
+				echo "${env.version}"
 				sh "git tag -a ${params.version} -m \"Release ${env.version}\""
 				bat "git push origin ${env.VERSION}"
 			}
