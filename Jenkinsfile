@@ -15,6 +15,7 @@ pipeline {
                 }
             }
             steps {
+                sh "kubectl get pods"
                 sh 'python -m py_compile main.py' 
             }
         }
