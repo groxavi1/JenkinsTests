@@ -28,7 +28,6 @@ pipeline {
                     MTktwrQgwJOfZpsc3RDbOQnh07taNfOtGHv3hBcTH6orj3KnF+rij4pIn8yVATpE
                     hatAGQHtcFkltmZHZg1/qoBQFTrCOGwpeRwSz0AcZaSeUy5U85MbO9JO0GqLkdPC
                     v4XH9+5IuejxCF5SDwtw''',
-                    contextName: 'gke_internaltools-184612_us-east1-b_internaltools-cluster',
                     credentialsId: 'internal-tools-cluster-credentials', serverUrl: 'https://35.237.228.119']) {
                         sh 'kubectl config set-context $(kubectl config current-context) --namespace=software-tools-webserver-prod'
                         sh 'kubectl get pods'
