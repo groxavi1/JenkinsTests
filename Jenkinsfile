@@ -31,8 +31,8 @@ pipeline {
                     -----END CERTIFICATE-----''',
                     contextName: 'gke_internaltools-184612_us-east1-b_internaltools-cluster',
                     credentialsId: 'internal-tools-cluster-credentials', serverUrl: '35.237.228.119') {
-                        kubectl config set-context $(kubectl config current-context) --namespace=software-tools-webserver-prod
-                        kubectl get pods
+                        sh 'kubectl config set-context $(kubectl config current-context) --namespace=software-tools-webserver-prod'
+                        sh 'kubectl get pods'
                     }
             }
         }
