@@ -16,7 +16,6 @@ pipeline {
                     sh '''
                         curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
                         chmod +x ./kubectl && alias kubectl=./kubectl
-                        use $GKE_CONTEXT
                         cat $GKE_CONTEXT
                         cat $GKE_CONTEXT >> $HOME/.kube/config
                         kubectl config get-contexts
