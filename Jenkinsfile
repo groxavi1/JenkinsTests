@@ -11,7 +11,7 @@ pipeline {
         stage('Installing kubectl') {
             steps {
                 withCredentials([
-                    string(credentialsId: 'test', variable: 'TEST')
+                    string(credentialsId: 'test', variable: 'TEST'),
                     kubeconfigContent(credentialsId: 'intarnal-tool-us-east-1-kubectl-config', variable: 'GKE_CONFIG')])
                 {
                     sh '''
