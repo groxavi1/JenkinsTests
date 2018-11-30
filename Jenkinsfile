@@ -29,7 +29,6 @@ pipeline {
                     hatAGQHtcFkltmZHZg1/qoBQFTrCOGwpeRwSz0AcZaSeUy5U85MbO9JO0GqLkdPC
                     v4XH9+5IuejxCF5SDwtw''',
                     credentialsId: 'internal-tools-cluster-credentials', serverUrl: 'https://35.237.228.119']) {
-                        sh 'kubectl config set-context $(kubectl config current-context) --namespace=software-tools-webserver-prod'
                         sh 'kubectl get pods'
                     }
             }
