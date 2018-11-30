@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Kubernetes tests'){
             steps {
-                withKubeConfig(caCertificate: '''-----BEGIN CERTIFICATE-----
+                withKubeConfig([caCertificate: '''-----BEGIN CERTIFICATE-----
                     MIIDCzCCAfOgAwIBAgIQAr3FqyD+MZadGDybzvIRTjANBgkqhkiG9w0BAQsFADAv
                     MS0wKwYDVQQDEyRkYTFlZDI0My1mM2I0LTRjNDktOTk3Yi1kMGFmYzJiMDVmMGIw
                     HhcNMTgxMTE2MTUwMjU1WhcNMjMxMTE1MTYwMjU1WjAvMS0wKwYDVQQDEyRkYTFl
@@ -30,21 +30,10 @@ pipeline {
                     v4XH9+5IuejxCF5SDwtw
                     -----END CERTIFICATE-----''',
                     contextName: 'gke_internaltools-184612_us-east1-b_internaltools-cluster',
-                    credentialsId: 'internal-tools-cluster-credentials', serverUrl: '35.237.228.119') {
+                    credentialsId: 'internal-tools-cluster-credentials', serverUrl: 'https://35.237.228.119']) {
                         sh 'kubectl config set-context $(kubectl config current-context) --namespace=software-tools-webserver-prod'
                         sh 'kubectl get pods'
                     }
-            }
-        }
-        stage('Py Compile') { 
-            agent {
-                docker {
-                    image 'python:2-alpine' 
-                }
-            }
-            steps {
-                sh "kubectl get pods"
-                sh 'python -m py_compile main.py' 
             }
         }
 	}
