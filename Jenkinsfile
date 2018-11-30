@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Kubernetes tests'){
             steps {
-                withKubeConfig([caCertificate: '''-----BEGIN CERTIFICATE-----
+                withKubeConfig([caCertificate: '''
                     MIIDCzCCAfOgAwIBAgIQAr3FqyD+MZadGDybzvIRTjANBgkqhkiG9w0BAQsFADAv
                     MS0wKwYDVQQDEyRkYTFlZDI0My1mM2I0LTRjNDktOTk3Yi1kMGFmYzJiMDVmMGIw
                     HhcNMTgxMTE2MTUwMjU1WhcNMjMxMTE1MTYwMjU1WjAvMS0wKwYDVQQDEyRkYTFl
@@ -27,8 +27,7 @@ pipeline {
                     86DEdSWJA4ynzj508r9oBqjOCUfXb0Dukr/sUm9Z1Dbstu6Dqvj7RSrqW8Og7lF4
                     MTktwrQgwJOfZpsc3RDbOQnh07taNfOtGHv3hBcTH6orj3KnF+rij4pIn8yVATpE
                     hatAGQHtcFkltmZHZg1/qoBQFTrCOGwpeRwSz0AcZaSeUy5U85MbO9JO0GqLkdPC
-                    v4XH9+5IuejxCF5SDwtw
-                    -----END CERTIFICATE-----''',
+                    v4XH9+5IuejxCF5SDwtw''',
                     contextName: 'gke_internaltools-184612_us-east1-b_internaltools-cluster',
                     credentialsId: 'internal-tools-cluster-credentials', serverUrl: 'https://35.237.228.119']) {
                         sh 'kubectl config set-context $(kubectl config current-context) --namespace=software-tools-webserver-prod'
