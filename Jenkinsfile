@@ -11,7 +11,7 @@ pipeline {
         stage('Installing kubectl') {
             steps {
                 withCredentials([
-                    usernamePassword(credentialsId: 'internal-tools-gke-credentials-us-east1-b', passwordVariable: 'GKE_PASSWORD', usernameVariable: 'GKE_USER'),
+                    usernamePassword(credentialsId: 'internal-tools-gke-credentials-us-east1-b', passwordVariable: 'GKE_PASSWORD', usernameVariable: 'GKE_USER')]
                 {
                     withKubeConfig(caCertificate: '', contextName: '', credentialsId: 'internaltools-cluster-gke-kubectl-config', serverUrl: ''){
                         sh '''
@@ -21,7 +21,6 @@ pipeline {
                             kubectl get pods
                         '''
                     }
-
                 }
             }
         }
