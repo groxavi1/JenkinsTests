@@ -11,15 +11,13 @@ pipeline {
         stage('Installing kubectl') {
             steps {
                 withCredentials([
-                    string(credentialsId: 'test', variable: 'TEST'),
-                    kubeconfigContent(credentialsId: 'intarnal-tool-us-east-1-kubectl-config', variable: 'GKE_CONFIG')])
+                    file(credentialsId: 'internaltools-cluster-gke-kubectl-config', variable: 'GKE_CONFIG')])
                 {
                     sh '''
                         curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
                         chmod +x ./kubectl && alias kubectl=./kubectl
-                        echo $TEST
-                        echo $GKE_CONTEXT
-                        echo $GKE_CONTEXT >> $HOME/.kube/config
+                        cat \$GKE_CONFIG
+                        cp \$GKE_CONFIG >> $HOME/.kube/config
                         kubectl config get-contexts
                         kubectl get pods
                     '''
