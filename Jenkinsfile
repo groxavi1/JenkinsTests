@@ -18,7 +18,7 @@ pipeline {
                         curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
                         chmod +x ./kubectl && alias kubectl=./kubectl
                         kubectl config set-credentials user --username=$GKE_USER --password=$GKE_PASSWORD
-                        kubectl config set-cluster internaltools-cluster --insecure-skip-tls-verify=true --server=https:35.237.228.119
+                        kubectl config set-cluster gke_internaltools-184612_us-east1-b_internaltools-cluster --insecure-skip-tls-verify=true --server=https:35.237.228.119
                         kubectl get pods
                     '''
                 }
