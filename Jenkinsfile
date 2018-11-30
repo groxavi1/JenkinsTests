@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
 	parameters {
         string(defaultValue: '3', description: 'Version number.', name: 'version')
     }
@@ -9,7 +9,7 @@ pipeline {
 
     stages {
         stage('Installing kubectl') {
-            node('Kubectl') {
+            steps {
                 sh 'curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl'
                 sh 'chmod +x ./kubectl && mv kubectl /usr/local/sbin'
             }
