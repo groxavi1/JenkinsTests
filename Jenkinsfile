@@ -18,6 +18,7 @@ pipeline {
                 {
                     kubectl config set-credentials user --username=$GKE_USER --password=$GKE_PASSWORD
                     kubectl config set-cluster internaltools-cluster --insecure-skip-tls-verify=true --server=https:35.237.228.119
+                    kubectl get pods
                 }
             }
         }
