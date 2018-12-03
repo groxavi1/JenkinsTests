@@ -15,16 +15,14 @@ pipeline {
                 {
                     withCredentials([usernamePassword(credentialsId: 'internal-tools-gke-credentials-us-east1-b', passwordVariable: 'GKE_PASSWORD', usernameVariable: 'GKE_USER')])
                     {
-                        withEnv(["VERSION=${env.VERSION}"]){
-                            sh '''
-                                curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-                                chmod +x ./kubectl && alias kubectl=./kubectl
-                                echo $VERSION
-                                kubectl config set-credentials $GKE_USER --username=$GKE_USER --password=$GKE_PASSWORD
-                                kubectl config get-contexts
-                                kubectl get pods
-                            '''
-                        }
+                    sh """
+                            curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+                            chmod +x ./kubectl && alias kubectl=./kubectl
+                            echo ${env.VERSION}
+                            kubectl config set-credentials $GKE_USER --username=$GKE_USER --password=$GKE_PASSWORD
+                            kubectl config get-contexts
+                            kubectl get pods
+                        """
                     }
                 }
             }
