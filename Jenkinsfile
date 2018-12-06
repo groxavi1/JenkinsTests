@@ -1,7 +1,7 @@
 def dockerImage
 pipeline {
     agent {
-      label 'gce-build-ubuntu-docker'
+      any
     }
     triggers{
         pollSCM(env.BRANCH_NAME == "master" ? "*/5 * * * *" : "")
