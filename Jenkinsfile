@@ -16,24 +16,30 @@ pipeline {
     stages {
       stage("Building docker image"){
         steps{
-          dockerImage = docker.build("${IMAGE_NAME}")
+            script {
+                dockerImage = docker.build("${IMAGE_NAME}")
+            }
         }
       }
       stage("tests image") {
         //Running the tests inside the image, all the dependencies are built in the image.
         steps{
-            dockerImage.inside {
-            sh "pip install pytest"
-            sh "pip install --requirement requirements.txt"
-            sh "python3 -m pytest tests"
+            script{
+                dockerImage.inside {
+                    sh "pip install pytest"
+                    sh "pip install --requirement requirements.txt"
+                    sh "python3 -m pytest tests"
+                }
             }
         }
       }
       stage("Push image") {
         //Lets push the image using the bash as tag
         steps{
-            dockerImage.withRegistry("https://${env.REGISTRY_URL}", "${env.GCR_CREDENTIALS}") {
-                dockerImage.push("${env.GIT_BRANCH}")  
+            script {
+                dockerImage.withRegistry("https://${env.REGISTRY_URL}", "${env.GCR_CREDENTIALS}") {
+                    dockerImage.push("${env.GIT_BRANCH}")  
+                }
             }
         }
       }
