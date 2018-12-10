@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Installing kubectl') {
             steps {
-                withKubeConfig(caCertificate: '', contextName: '', credentialsId: 'internaltools-cluster-gke-kubectl-config', serverUrl: '')
+                withKubeConfig(credentialsId: 'internaltools-cluster-gke-kubectl-config')
                 {
                     withCredentials([usernamePassword(credentialsId: 'internal-tools-gke-credentials-us-east1-b', passwordVariable: 'GKE_PASSWORD', usernameVariable: 'GKE_USER')])
                     {
