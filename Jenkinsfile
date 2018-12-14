@@ -11,6 +11,9 @@ pipeline {
 
     stages {
         stage('Installing kubectl') {
+            when {
+                branch 'master'
+            }
             steps {
                 withKubeConfig(credentialsId: 'internaltools-cluster-gke-kubectl-config')
                 {
