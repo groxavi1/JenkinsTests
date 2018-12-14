@@ -1,4 +1,5 @@
-stage("Build and Push Docker"){
+pipeline {
+	stage("Build and Push Docker"){
 		agent any
 		parameters {
 			string(defaultValue: '3', description: 'Version number.', name: 'version')
@@ -30,4 +31,5 @@ stage("Build and Push Docker"){
 				}
 			}
 		}
-    }
+	}
+}
