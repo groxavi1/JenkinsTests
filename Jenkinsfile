@@ -11,6 +11,7 @@ pipeline {
 
     stages {
         stage('Installing kubectl') {
+            //comment
             when{
                 branch 'master'
             }
