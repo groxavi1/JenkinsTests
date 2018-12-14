@@ -11,7 +11,7 @@ pipeline {
 
     stages {
         stage('Installing kubectl') {
-            when {
+            when{
                 branch 'master'
             }
             steps {
