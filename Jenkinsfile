@@ -1,4 +1,13 @@
 stage("Build and Push Docker"){
+		agent any
+		parameters {
+			string(defaultValue: '3', description: 'Version number.', name: 'version')
+		}
+		environment {
+			VERSION = "${params.version}"
+			GKE_PROD_NAMESPACE = "software-tools-webserver-prod"
+			
+		}
 		stage('Update on gcloud') {
 			//TODO: setup for the dev setup when created
 			if (env.BRANCH_NAME == 'master'){
