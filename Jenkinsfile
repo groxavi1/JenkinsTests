@@ -27,7 +27,7 @@ pipeline {
 											chmod +x ./kubectl
 											kubectl config set-credentials $GKE_USER --username=$GKE_USER --password=$GKE_PASSWORD
 											kubectl config set-context \$(kubectl config current-context) --namespace=${env.GKE_PROD_NAMESPACE}
-											bash ./kubernetes/test.sh update-image
+											bash ./test.sh update-image
 										"""
 									}
                                 }
