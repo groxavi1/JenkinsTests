@@ -23,7 +23,6 @@ pipeline {
 									withEnv(["PATH=${WORKSPACE}:${env.PATH}"]){
 										echo "$PATH"
 										sh """
-											cd ./kubernetes
 											curl -LO https://storage.googleapis.com/kubernetes-release/release/\$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 											chmod +x ./kubectl
 											kubectl config set-credentials $GKE_USER --username=$GKE_USER --password=$GKE_PASSWORD
