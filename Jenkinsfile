@@ -20,7 +20,7 @@ pipeline {
                             {
                                 withCredentials([usernamePassword(credentialsId: 'internal-tools-gke-credentials-us-east1-b', passwordVariable: 'GKE_PASSWORD', usernameVariable: 'GKE_USER')])
                                 {
-									withEnv(['PATH=${WORKSPACE}:${env.PATH}']){
+									withEnv(["PATH=${WORKSPACE}:${env.PATH}""]){
 										echo "$PATH"
 										sh """
 											cd ./kubernetes
