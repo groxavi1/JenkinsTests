@@ -13,21 +13,24 @@ pipeline {
 			steps {
 				script{
 					//TODO: setup for the dev setup when created
-					if (env.BRANCH_NAME == 'master'){
-						withKubeConfig(credentialsId: 'internaltools-cluster-gke-kubectl-config')
-						{
-							withCredentials([usernamePassword(credentialsId: 'internal-tools-gke-credentials-us-east1-b', passwordVariable: 'GKE_PASSWORD', usernameVariable: 'GKE_USER')])
-							{
-								sh """
-									curl -LO https://storage.googleapis.com/kubernetes-release/release/\$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-									chmod +x ./kubectl && alias kubectl=./kubectl
-									kubectl config set-credentials $GKE_USER --username=$GKE_USER --password=$GKE_PASSWORD
-									kubectl config set-context \$(kubectl config current-context) --namespace=${env.GKE_PROD_NAMESPACE}
-									kubectl get pods
-								"""
-							}
-						}
-					}
+					stage('Update on gcloud') {
+                        //TODO: setup for the dev setup when created
+                        if (env.BRANCH_NAME == 'master'){
+                            withKubeConfig(credentialsId: 'internaltools-cluster-gke-kubectl-config')
+                            {
+                                withCredentials([usernamePassword(credentialsId: 'internal-tools-gke-credentials-us-east1-b', passwordVariable: 'GKE_PASSWORD', usernameVariable: 'GKE_USER')])
+                                {
+                                    sh """
+                                        curl -LO https://storage.googleapis.com/kubernetes-release/release/\$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+                                        chmod +x ./kubectl && alias kubectl=./kubectl
+                                        kubectl config set-credentials $GKE_USER --username=$GKE_USER --password=$GKE_PASSWORD
+                                        kubectl config set-context \$(kubectl config current-context) --namespace=${env.GKE_PROD_NAMESPACE}
+                                        kubectl get pods
+                                    """
+                                }
+                            }
+                        }
+                    }
 				}
 			}
 		}
