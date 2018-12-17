@@ -1,5 +1,6 @@
 update_image() {
     echo "Updating image with rolling update"
+    echo "$kubectl"
     kubectl get pods
 }
 
